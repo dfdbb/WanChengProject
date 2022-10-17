@@ -1,8 +1,7 @@
 package com.example.wanchengdemo.controller;
-
-import Z.project.test.domain.Userrole;
-import Z.project.test.service.IUserroleService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.wanchengdemo.domain.Userrole;
+import com.example.wanchengdemo.service.IUserroleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ public class UserroleController {
     @Autowired
     private IUserroleService userroleService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,Userrole userrole){
+    public AjaxResult page(PageEntity pageEntity, Userrole userrole){
         return AjaxResult.success(userroleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(userrole)));
     }
     @GetMapping("/list")

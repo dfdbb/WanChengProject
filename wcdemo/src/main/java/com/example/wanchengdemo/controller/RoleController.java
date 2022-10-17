@@ -1,8 +1,8 @@
 package com.example.wanchengdemo.controller;
 
-import Z.project.test.domain.Role;
-import Z.project.test.service.IRoleService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.wanchengdemo.domain.Role;
+import com.example.wanchengdemo.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.AjaxResult;
@@ -16,7 +16,7 @@ public class RoleController {
     @Autowired
     private IRoleService roleService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,Role role){
+    public AjaxResult page(PageEntity pageEntity, Role role){
         return AjaxResult.success(roleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(role)));
     }
     @GetMapping("/list")
