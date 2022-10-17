@@ -1,9 +1,7 @@
 package com.example.wanchengdemo.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wanchengdemo.commom.R;
-import com.example.wanchengdemo.entity.Project;
 import com.example.wanchengdemo.service.SiteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@RestController
-@RequestMapping("/site")
+/*@RestController
+@RequestMapping("/site")*/
 public class TestSiteController {
     @Autowired
     private SiteService siteService;
