@@ -3,6 +3,7 @@ package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.wanchengdemo.commom.R;
+import com.example.wanchengdemo.commom.pageR;
 import com.example.wanchengdemo.domain.Rolepermission;
 import com.example.wanchengdemo.service.IRolepermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class RolepermissionController {
     @Autowired
     private IRolepermissionService rolepermissionService;
     @GetMapping("/page")
-    public R page(PageEntity pageEntity, Rolepermission rolepermission){
-        return R.success(rolepermissionService.page(pageEntity.toPage(), Wrappers.lambdaQuery(rolepermission)));
+    public R page(pageR pageR, Rolepermission rolepermission){
+        return R.success(rolepermissionService.page(pageR.toPage(), Wrappers.lambdaQuery(rolepermission)));
     }
     @GetMapping("/list")
     public R list(Rolepermission rolepermission){

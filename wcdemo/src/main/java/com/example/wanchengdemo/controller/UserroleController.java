@@ -1,6 +1,7 @@
 package com.example.wanchengdemo.controller;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.wanchengdemo.commom.R;
+import com.example.wanchengdemo.commom.pageR;
 import com.example.wanchengdemo.domain.Userrole;
 import com.example.wanchengdemo.service.IUserroleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class UserroleController {
     @Autowired
     private IUserroleService userroleService;
     @GetMapping("/page")
-    public R page(PageEntity pageEntity, Userrole userrole){
-        return R.success(userroleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(userrole)));
+    public R page(pageR pageR, Userrole userrole){
+        return R.success(userroleService.page(pageR.toPage(), Wrappers.lambdaQuery(userrole)));
     }
     @GetMapping("/list")
     public R list(Userrole userrole){

@@ -2,6 +2,7 @@ package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.wanchengdemo.commom.R;
+import com.example.wanchengdemo.commom.pageR;
 import com.example.wanchengdemo.domain.Role;
 import com.example.wanchengdemo.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class RoleController {
     @Autowired
     private IRoleService roleService;
     @GetMapping("/page")
-    public R page(PageEntity pageEntity, Role role){
-        return R.success(roleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(role)));
+    public R page(pageR pageR, Role role){
+        return R.success(roleService.page(pageR.toPage(), Wrappers.lambdaQuery(role)));
     }
     @GetMapping("/list")
     public R list(Role role){
