@@ -1,3 +1,4 @@
+package com.example.wanchengdemo.controller;/*
 package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -5,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wanchengdemo.annotation.PassToken;
 import com.example.wanchengdemo.annotation.UserLoginToken;
 import com.example.wanchengdemo.commom.R;
-import com.example.wanchengdemo.entity.User;
 import com.example.wanchengdemo.service.UserService;
 import com.example.wanchengdemo.util.TestJwt;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,8 @@ public class TestController {
     private UserService userService;
 
 
-    /*@PostMapping("/login")
+    */
+/*@PostMapping("/login")
     public R<String> login(HttpServletRequest request, @RequestBody User user){
         // 1.将密码进行MD5加密
 
@@ -58,7 +59,8 @@ public class TestController {
         return R.success("登录成功");
 
 
-    }*/
+    }*//*
+
 
     @PassToken
     @PostMapping("/login")
@@ -97,9 +99,11 @@ public class TestController {
 
     }
 
-    /*
+    */
+/*
      * 用户退出
-     * */
+     * *//*
+
     @PostMapping("/logout")
     public R<String> logout(HttpServletRequest request){
         //清理session中保存的的当前用户 id
@@ -170,6 +174,7 @@ public class TestController {
 
 
     //模糊查询  待测试 第一测试正常
+*/
 /*    @GetMapping("/getLike")
     public R<List> getLike(@RequestBody User user){
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
@@ -179,7 +184,8 @@ public class TestController {
         queryWrapper.like(StringUtils.isNotEmpty(user.getDepartment()),User::getDepartment,user.getDepartment());
         List<User> list = userService.list(queryWrapper);
         return R.success(list);
-    }*/
+    }*//*
+
 
 
     //根据id删除用户
@@ -220,3 +226,4 @@ public class TestController {
 
 
 }
+*/

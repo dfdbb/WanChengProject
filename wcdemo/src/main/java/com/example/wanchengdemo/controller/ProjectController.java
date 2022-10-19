@@ -2,6 +2,7 @@ package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Project;
 import com.example.wanchengdemo.service.ProjectService;
@@ -21,9 +22,6 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
-
-
-
 
     //分页查询
     /*
@@ -46,8 +44,8 @@ public class ProjectController {
         queryWrapper.orderByAsc(Project::getPid);
 
         //执行查询
+//报错        projectService.page(pageInfo,queryWrapper);
         projectService.page(pageInfo,queryWrapper);
-
         return R.success(pageInfo);
 
     }
@@ -61,10 +59,8 @@ public class ProjectController {
         log.info(String.valueOf(project.getPid()));
 
         //按pid进行精准查询
-        if (project.getPid()>0){
-            System.out.println(String.valueOf(project.getPid()));
-            queryWrapper.eq(Project::getPid,project.getPid());
-        }
+        queryWrapper.eq(StringUtils.isNotEmpty(project.getPid()),Project::getPid,project.getPid());
+
         //按项目名
         queryWrapper.like(StringUtils.isNotEmpty(project.getPname()),Project::getPname,project.getPname());
         //按项目所有人
@@ -82,7 +78,11 @@ public class ProjectController {
     //新增数据
     @PostMapping
     public R<String> insert(HttpServletRequest request, @RequestBody Project project){
-        log.info("增加数据 ");
+        //雪花算法生成id
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
+
+        project.setPid(String.valueOf(snowflakeId));
         projectService.save(project);
         return R.success("添加成功");
     }

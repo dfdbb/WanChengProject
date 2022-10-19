@@ -2,6 +2,7 @@ package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Section;
 import com.example.wanchengdemo.service.SectionService;
@@ -45,15 +46,10 @@ public class SectionController {
         queryWrapper.like(StringUtils.isNotEmpty(section.getScons()),Section::getScons,section.getScons());
 
         //按id
-
-        if (section.getSid()>0){
-            queryWrapper.eq(Section::getSid,section.getSid());
-        }
+        queryWrapper.eq(StringUtils.isNotEmpty(section.getSid()),Section::getSid,section.getSid());
 
         //按spid
-        if (section.getSpid()>0){
-            queryWrapper.eq(Section::getSpid,section.getSpid());
-        }
+        queryWrapper.eq(StringUtils.isNotEmpty(section.getSpid()),Section::getSpid,section.getSpid());
 
 
 
@@ -68,6 +64,10 @@ public class SectionController {
         LambdaQueryWrapper<Section> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.eq(Section::getSid,section.getSid());
 
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
+
+        section.setSid(String.valueOf(snowflakeId));
         sectionService.save(section);
         return R.success("添加成功");
     }

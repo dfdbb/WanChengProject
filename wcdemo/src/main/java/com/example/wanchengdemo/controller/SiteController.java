@@ -2,6 +2,7 @@ package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Site;
 import com.example.wanchengdemo.service.SiteService;
@@ -39,17 +40,10 @@ public class SiteController {
         LambdaQueryWrapper<Site> queryWrapper = new LambdaQueryWrapper<>();
 
         //按id
-        long siteid = site.getSiteid();
-        if (siteid > 0){
-            if (StringUtils.isNotEmpty(String.valueOf(site.getSiteid()))){
-                queryWrapper.eq(Site::getSiteid,site.getSiteid());
-            }
-        }
+        queryWrapper.eq(StringUtils.isNotEmpty(site.getSiteid()),Site::getSiteid,site.getSiteid());
 
         //按sitesid
-        if (site.getSitesid() > 0){
-            queryWrapper.eq(Site::getSitesid,site.getSitesid());
-        }
+        queryWrapper.eq(StringUtils.isNotEmpty(site.getSitesid()),Site::getSitesid,site.getSitesid());
 
         //按桩号查询
        queryWrapper.like(StringUtils.isNotEmpty(site.getSitecode()),Site::getSitecode,site.getSitecode());
@@ -87,7 +81,10 @@ public class SiteController {
     public R<String> insert(@RequestBody Site site){
         LambdaQueryWrapper<Site> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.eq(Site::getSiteid,site.getSiteid());
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
 
+        site.setSiteid(String.valueOf(snowflakeId));
         siteService.save(site);
         return R.success("添加成功");
     }

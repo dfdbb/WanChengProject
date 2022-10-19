@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wanchengdemo.annotation.PassToken;
 import com.example.wanchengdemo.annotation.UserLoginToken;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.User;
 import com.example.wanchengdemo.service.UserService;
@@ -117,10 +118,16 @@ public class UserController {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.eq(User::getUsername,user.getUsername());
         User ump = userService.getOne(queryWrapper);
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
+
 
         //3.如果没有查询到则继续
         if ( ump == null){
             log.info("开始新增用户");
+            user.setUid(String.valueOf(snowflakeId));
+            log.info("新增uid为：{}",user.getUid());
+
             System.out.println(user);
             userService.save(user);
             return R.success("添加用户成功");
@@ -155,8 +162,8 @@ public class UserController {
     @GetMapping
     public R<List> getAll(User user){
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
-
-        queryWrapper.like(user.getUid() != 0,User::getUid,user.getUid());
+        //根据id查询
+        queryWrapper.eq(StringUtils.isNotEmpty(user.getUid()),User::getUid,user.getUid());
         queryWrapper.like(StringUtils.isNotEmpty(user.getUsername()),User::getUsername,user.getUsername());
         queryWrapper.like(StringUtils.isNotEmpty(user.getDepartment()),User::getDepartment,user.getDepartment());
 
