@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
-import xin.altitude.cms.common.entity.AjaxResult;
 // 通用返回结果类，服务端返回结果最终都会返回为此对象
 
 

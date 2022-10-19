@@ -3,8 +3,6 @@ package com.example.wanchengdemo.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wanchengdemo.commom.R;
-import com.example.wanchengdemo.entity.Project;
-import com.example.wanchengdemo.entity.Segment;
 import com.example.wanchengdemo.entity.Site;
 import com.example.wanchengdemo.service.SiteService;
 import lombok.extern.slf4j.Slf4j;

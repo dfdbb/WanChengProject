@@ -1,57 +1,44 @@
 package com.example.wanchengdemo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class Section {
+import java.time.LocalDateTime;
+import java.util.Objects;
 
-  private long sid;
-  private String sname;
-  private String stesting;
-  private String scons;
-  private long spid;
-
-
-  public long getSid() {
-    return sid;
-  }
-
-  public void setSid(long sid) {
-    this.sid = sid;
-  }
-
-
-  public String getSname() {
-    return sname;
-  }
-
-  public void setSname(String sname) {
-    this.sname = sname;
-  }
-
-
-  public String getStesting() {
-    return stesting;
-  }
-
-  public void setStesting(String stesting) {
-    this.stesting = stesting;
-  }
-
-
-  public String getScons() {
-    return scons;
-  }
-
-  public void setScons(String scons) {
-    this.scons = scons;
-  }
-
-
-  public long getSpid() {
-    return spid;
-  }
-
-  public void setSpid(long spid) {
-    this.spid = spid;
-  }
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName(value = "section")
+public class Section{
+    private static final long serialVersionUID = 1L;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createtime;
+    private String modifiedby;
+    private String scons;
+    @TableId(type = IdType.AUTO)
+    private String sid;
+    private String sname;
+    private String spid;
+    private String stesting;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updatetime;
+    
+    public Section(Section section) {
+        if (Objects.nonNull(section)) {
+            this.createtime=section.createtime;
+            this.modifiedby=section.modifiedby;
+            this.scons=section.scons;
+            this.sid=section.sid;
+            this.sname=section.sname;
+            this.spid=section.spid;
+            this.stesting=section.stesting;
+            this.updatetime=section.updatetime;
+        }
+    }
 }

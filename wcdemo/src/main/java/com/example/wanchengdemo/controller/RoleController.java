@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/test/role")
+
 public class RoleController {
     @Autowired
     private IRoleService roleService;

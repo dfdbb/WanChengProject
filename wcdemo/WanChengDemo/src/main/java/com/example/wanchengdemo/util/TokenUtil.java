@@ -1,7 +1,5 @@
 package com.example.wanchengdemo.util;
 
-import com.example.wanchengdemo.entity.User;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;

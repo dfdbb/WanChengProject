@@ -7,5 +7,5 @@ import com.example.wanchengdemo.service.ProjectService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProjectServiceimpl extends ServiceImpl<ProjectMapper,Project> implements ProjectService {
+public class ProjectServiceimpl extends ServiceImpl<ProjectMapper, Project> implements ProjectService {
 }

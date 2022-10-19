@@ -1,65 +1,46 @@
 package com.example.wanchengdemo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
-public class User {
-
-  private long uid;
-  private String username;
-  private String pwd;
-  private String department;
-
-
-  public long getUid() {
-    return uid;
-  }
-
-  public void setUid(long uid) {
-    this.uid = uid;
-  }
-
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-
-  public String getPwd() {
-    return pwd;
-  }
-
-  public void setPwd(String pwd) {
-    this.pwd = pwd;
-  }
-
-
-  public String getDepartment() {
-    return department;
-  }
-
-  public void setDepartment(String department) {
-    this.department = department;
-  }
-
-
-  public String getToken(User user) {
-    return JWT.create().withAudience(user.getUsername())
-            .sign(Algorithm.HMAC256(user.getPwd()));
-  }
-
-  @Override
-  public String toString() {
-    return "User{" +
-            "uid=" + uid +
-            ", username='" + username + '\'' +
-            ", pwd='" + pwd + '\'' +
-            ", department='" + department + '\'' +
-            '}';
-  }
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName(value = "user")
+public class User{
+    private static final long serialVersionUID = 1L;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createtime;
+    private String department;
+    private String mail;
+    private String modifiedby;
+    private String phone;
+    private String pwd;
+    @TableId(type = IdType.AUTO)
+    private String uid;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updatetime;
+    private String username;
+    
+    public User(User user) {
+        if (Objects.nonNull(user)) {
+            this.createtime=user.createtime;
+            this.department=user.department;
+            this.mail=user.mail;
+            this.modifiedby=user.modifiedby;
+            this.phone=user.phone;
+            this.pwd=user.pwd;
+            this.uid=user.uid;
+            this.updatetime=user.updatetime;
+            this.username=user.username;
+        }
+    }
 }
