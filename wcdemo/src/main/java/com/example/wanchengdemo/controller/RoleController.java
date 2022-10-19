@@ -1,6 +1,7 @@
 package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.domain.Role;
 import com.example.wanchengdemo.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +17,28 @@ public class RoleController {
     @Autowired
     private IRoleService roleService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, Role role){
-        return AjaxResult.success(roleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(role)));
+    public R page(PageEntity pageEntity, Role role){
+        return R.success(roleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(role)));
     }
     @GetMapping("/list")
-    public AjaxResult list(Role role){
-        return AjaxResult.success(roleService.list(Wrappers.lambdaQuery(role)));
+    public R list(Role role){
+        return R.success(roleService.list(Wrappers.lambdaQuery(role)));
     }
     @PostMapping("/add")
-    public AjaxResult add(@RequestBody Role role) {
-        return AjaxResult.success(roleService.save(role));
+    public R add(@RequestBody Role role) {
+        return R.success(roleService.save(role));
     }
     @PutMapping("/edit")
-    public AjaxResult edit(@RequestBody Role role) {
-        return AjaxResult.success(roleService.updateById(role));
+    public R edit(@RequestBody Role role) {
+        return R.success(roleService.updateById(role));
     }
     @DeleteMapping("/delete/{roleids}")
-    public AjaxResult delete(@PathVariable Integer[] roleids) {
-        return AjaxResult.success(roleService.removeByIds(Arrays.asList(roleids)));
+    public R delete(@PathVariable Integer[] roleids) {
+        return R.success(roleService.removeByIds(Arrays.asList(roleids)));
     }
     @GetMapping(value = "/detail/{roleid}")
-    public AjaxResult detail(@PathVariable("roleid") Integer roleid) {
-        return AjaxResult.success(roleService.getById(roleid));
+    public R detail(@PathVariable("roleid") Integer roleid) {
+        return R.success(roleService.getById(roleid));
     }
 }
+

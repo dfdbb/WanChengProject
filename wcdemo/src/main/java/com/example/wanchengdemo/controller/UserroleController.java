@@ -16,24 +16,24 @@ public class UserroleController {
     @Autowired
     private IUserroleService userroleService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, Userrole userrole){
-        return AjaxResult.success(userroleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(userrole)));
+    public R page(PageEntity pageEntity, Userrole userrole){
+        return R.success(userroleService.page(pageEntity.toPage(), Wrappers.lambdaQuery(userrole)));
     }
     @GetMapping("/list")
-    public AjaxResult list(Userrole userrole){
-        return AjaxResult.success(userroleService.list(Wrappers.lambdaQuery(userrole)));
+    public R list(Userrole userrole){
+        return R.success(userroleService.list(Wrappers.lambdaQuery(userrole)));
     }
     @PostMapping("/add")
-    public AjaxResult add(@RequestBody Userrole userrole) {
-        return AjaxResult.success(userroleService.save(userrole));
+    public R add(@RequestBody Userrole userrole) {
+        return R.success(userroleService.save(userrole));
     }
     @PutMapping("/edit")
-    public AjaxResult edit(@RequestBody Userrole userrole) {
-        return AjaxResult.success(userroleService.updateById(userrole));
+    public R edit(@RequestBody Userrole userrole) {
+        return R.success(userroleService.updateById(userrole));
     }
     @DeleteMapping("/delete/{roleids}")
-    public AjaxResult delete(@PathVariable Integer[] roleids) {
-        return AjaxResult.success(userroleService.removeByIds(Arrays.asList(roleids)));
+    public R delete(@PathVariable Integer[] roleids) {
+        return R.success(userroleService.removeByIds(Arrays.asList(roleids)));
     }
     @GetMapping(value = "/detail/{roleid}")
     public R detail(@PathVariable("roleid") Integer roleid) {

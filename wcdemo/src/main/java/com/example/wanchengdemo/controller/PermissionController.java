@@ -1,5 +1,6 @@
 package com.example.wanchengdemo.controller;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.domain.Permission;
 import com.example.wanchengdemo.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,27 +16,27 @@ public class PermissionController {
     @Autowired
     private IPermissionService permissionService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, Permission permission){
-        return AjaxResult.success(permissionService.page(pageEntity.toPage(), Wrappers.lambdaQuery(permission)));
+    public R page(PageEntity pageEntity, Permission permission){
+        return R.success(permissionService.page(pageEntity.toPage(), Wrappers.lambdaQuery(permission)));
     }
     @GetMapping("/list")
-    public AjaxResult list(Permission permission){
-        return AjaxResult.success(permissionService.list(Wrappers.lambdaQuery(permission)));
+    public R list(Permission permission){
+        return R.success(permissionService.list(Wrappers.lambdaQuery(permission)));
     }
     @PostMapping("/add")
-    public AjaxResult add(@RequestBody Permission permission) {
-        return AjaxResult.success(permissionService.save(permission));
+    public R add(@RequestBody Permission permission) {
+        return R.success(permissionService.save(permission));
     }
     @PutMapping("/edit")
-    public AjaxResult edit(@RequestBody Permission permission) {
-        return AjaxResult.success(permissionService.updateById(permission));
+    public R edit(@RequestBody Permission permission) {
+        return R.success(permissionService.updateById(permission));
     }
     @DeleteMapping("/delete/{permissionids}")
-    public AjaxResult delete(@PathVariable Integer[] permissionids) {
-        return AjaxResult.success(permissionService.removeByIds(Arrays.asList(permissionids)));
+    public R delete(@PathVariable Integer[] permissionids) {
+        return R.success(permissionService.removeByIds(Arrays.asList(permissionids)));
     }
     @GetMapping(value = "/detail/{permissionid}")
-    public AjaxResult detail(@PathVariable("permissionid") Integer permissionid) {
-        return AjaxResult.success(permissionService.getById(permissionid));
+    public R detail(@PathVariable("permissionid") Integer permissionid) {
+        return R.success(permissionService.getById(permissionid));
     }
 }
