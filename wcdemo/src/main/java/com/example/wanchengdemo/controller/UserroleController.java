@@ -1,4 +1,5 @@
 package com.example.wanchengdemo.controller;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.commom.pageR;
@@ -6,8 +7,6 @@ import com.example.wanchengdemo.domain.Userrole;
 import com.example.wanchengdemo.service.IUserroleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
-import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
 

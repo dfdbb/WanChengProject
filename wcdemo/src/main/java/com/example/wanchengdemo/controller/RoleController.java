@@ -7,8 +7,6 @@ import com.example.wanchengdemo.domain.Role;
 import com.example.wanchengdemo.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
-import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
 
