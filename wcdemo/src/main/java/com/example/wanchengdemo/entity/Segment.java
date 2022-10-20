@@ -18,22 +18,22 @@ import java.util.Objects;
 public class Segment{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
     private String roadhandle;
     private String roadway;
     private String segdate;
     private String segdesign;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private String segid;
     private String segrange;
     private String segsid;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Segment(Segment segment) {
         if (Objects.nonNull(segment)) {
-            this.createtime=segment.createtime;
+            this.CreateTime=segment.CreateTime;
             this.modifiedby=segment.modifiedby;
             this.roadhandle=segment.roadhandle;
             this.roadway=segment.roadway;
@@ -42,7 +42,7 @@ public class Segment{
             this.segid=segment.segid;
             this.segrange=segment.segrange;
             this.segsid=segment.segsid;
-            this.updatetime=segment.updatetime;
+            this.UpdateTime=segment.UpdateTime;
         }
     }
 }

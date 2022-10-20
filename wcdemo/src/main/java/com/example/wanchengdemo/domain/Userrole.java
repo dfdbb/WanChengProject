@@ -16,23 +16,24 @@ import java.util.Objects;
 public class Userrole{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
+
     private String roleid;
     private String rolename;
     private String uid;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     private String username;
     
     public Userrole(Userrole userrole) {
         if (Objects.nonNull(userrole)) {
-            this.createtime=userrole.createtime;
+            this.CreateTime=userrole.CreateTime;
             this.modifiedby=userrole.modifiedby;
             this.roleid=userrole.roleid;
             this.rolename=userrole.rolename;
             this.uid=userrole.uid;
-            this.updatetime=userrole.updatetime;
+            this.UpdateTime=userrole.UpdateTime;
             this.username=userrole.username;
         }
     }

@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Site{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private Integer deflectio1;
     private Integer deflectio2;
     private Float lfindex;
@@ -29,18 +29,18 @@ public class Site{
     private Integer rmax;
     private Integer rmin;
     private String sitecode;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private String siteid;
     private String sitelane;
     private String siteremark;
     private String sitesid;
     private Float tindex;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Site(Site site) {
         if (Objects.nonNull(site)) {
-            this.createtime=site.createtime;
+            this.CreateTime=site.CreateTime;
             this.deflectio1=site.deflectio1;
             this.deflectio2=site.deflectio2;
             this.lfindex=site.lfindex;
@@ -56,7 +56,7 @@ public class Site{
             this.siteremark=site.siteremark;
             this.sitesid=site.sitesid;
             this.tindex=site.tindex;
-            this.updatetime=site.updatetime;
+            this.UpdateTime=site.UpdateTime;
         }
     }
 }

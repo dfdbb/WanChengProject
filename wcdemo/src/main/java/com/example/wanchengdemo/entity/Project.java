@@ -18,23 +18,23 @@ import java.util.Objects;
 public class Project{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private String pid;
     private String pname;
     private String powner;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Project(Project project) {
         if (Objects.nonNull(project)) {
-            this.createtime=project.createtime;
+            this.CreateTime=project.CreateTime;
             this.modifiedby=project.modifiedby;
             this.pid=project.pid;
             this.pname=project.pname;
             this.powner=project.powner;
-            this.updatetime=project.updatetime;
+            this.UpdateTime=project.UpdateTime;
         }
     }
 }

@@ -18,21 +18,21 @@ import java.util.Objects;
 public class Role{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private String roleid;
     private String rolename;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Role(Role role) {
         if (Objects.nonNull(role)) {
-            this.createtime=role.createtime;
+            this.CreateTime=role.CreateTime;
             this.modifiedby=role.modifiedby;
             this.roleid=role.roleid;
             this.rolename=role.rolename;
-            this.updatetime=role.updatetime;
+            this.UpdateTime=role.UpdateTime;
         }
     }
 }

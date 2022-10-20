@@ -1,6 +1,7 @@
 package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.commom.pageR;
 import com.example.wanchengdemo.domain.Permission;
@@ -25,7 +26,11 @@ public class PermissionController {
     }
     @PostMapping("/add")
     public R add(@RequestBody Permission permission) {
+        //雪花算法生成id
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
         return R.success(permissionService.save(permission));
+
     }
     @PutMapping("/edit")
     public R edit(@RequestBody Permission permission) {

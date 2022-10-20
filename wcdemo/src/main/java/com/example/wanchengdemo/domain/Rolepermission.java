@@ -16,24 +16,25 @@ import java.util.Objects;
 public class Rolepermission{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
     private String permissioname;
     private String permissionid;
+
     private String roleid;
     private String rolename;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Rolepermission(Rolepermission rolepermission) {
         if (Objects.nonNull(rolepermission)) {
-            this.createtime=rolepermission.createtime;
+            this.CreateTime=rolepermission.CreateTime;
             this.modifiedby=rolepermission.modifiedby;
             this.permissioname=rolepermission.permissioname;
             this.permissionid=rolepermission.permissionid;
             this.roleid=rolepermission.roleid;
             this.rolename=rolepermission.rolename;
-            this.updatetime=rolepermission.updatetime;
+            this.UpdateTime=rolepermission.UpdateTime;
         }
     }
 }

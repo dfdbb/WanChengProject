@@ -18,28 +18,28 @@ import java.util.Objects;
 public class User{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String department;
     private String mail;
     private String modifiedby;
     private String phone;
     private String pwd;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private String uid;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     private String username;
     
     public User(User user) {
         if (Objects.nonNull(user)) {
-            this.createtime=user.createtime;
+            this.CreateTime=user.CreateTime;
             this.department=user.department;
             this.mail=user.mail;
             this.modifiedby=user.modifiedby;
             this.phone=user.phone;
             this.pwd=user.pwd;
             this.uid=user.uid;
-            this.updatetime=user.updatetime;
+            this.UpdateTime=user.UpdateTime;
             this.username=user.username;
         }
     }

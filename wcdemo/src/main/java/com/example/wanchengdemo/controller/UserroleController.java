@@ -1,6 +1,7 @@
 package com.example.wanchengdemo.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.commom.pageR;
 import com.example.wanchengdemo.domain.Userrole;
@@ -25,6 +26,9 @@ public class UserroleController {
     }
     @PostMapping("/add")
     public R add(@RequestBody Userrole userrole) {
+        //雪花算法生成id
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
         return R.success(userroleService.save(userrole));
     }
     @PutMapping("/edit")

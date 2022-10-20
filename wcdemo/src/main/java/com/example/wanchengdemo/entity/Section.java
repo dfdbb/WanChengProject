@@ -18,27 +18,27 @@ import java.util.Objects;
 public class Section{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
     private String scons;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private String sid;
     private String sname;
     private String spid;
     private String stesting;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Section(Section section) {
         if (Objects.nonNull(section)) {
-            this.createtime=section.createtime;
+            this.CreateTime=section.CreateTime;
             this.modifiedby=section.modifiedby;
             this.scons=section.scons;
             this.sid=section.sid;
             this.sname=section.sname;
             this.spid=section.spid;
             this.stesting=section.stesting;
-            this.updatetime=section.updatetime;
+            this.UpdateTime=section.UpdateTime;
         }
     }
 }

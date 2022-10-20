@@ -18,21 +18,21 @@ import java.util.Objects;
 public class Permission{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime CreateTime;
     private String modifiedby;
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER_STR)
     private Integer permissionid;
     private String permissionname;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatetime;
+    private LocalDateTime UpdateTime;
     
     public Permission(Permission permission) {
         if (Objects.nonNull(permission)) {
-            this.createtime=permission.createtime;
+            this.CreateTime=permission.CreateTime;
             this.modifiedby=permission.modifiedby;
             this.permissionid=permission.permissionid;
             this.permissionname=permission.permissionname;
-            this.updatetime=permission.updatetime;
+            this.UpdateTime=permission.UpdateTime;
         }
     }
 }
