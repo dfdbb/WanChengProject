@@ -2,7 +2,7 @@ package com.example.wanchengdemo.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.wanchengdemo.domain.User;
+import com.example.wanchengdemo.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

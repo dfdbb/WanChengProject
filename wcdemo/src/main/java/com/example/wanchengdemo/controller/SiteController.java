@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
-import com.example.wanchengdemo.domain.Site;
+import com.example.wanchengdemo.entity.Site;
 import com.example.wanchengdemo.service.SiteService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
