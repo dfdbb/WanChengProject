@@ -4,13 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
+import com.example.wanchengdemo.entity.Section;
 import com.example.wanchengdemo.entity.Segment;
+import com.example.wanchengdemo.service.SectionService;
 import com.example.wanchengdemo.service.SegmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -21,6 +24,9 @@ public class SegmentController {
 
     @Autowired
     private SegmentService segmentService;
+
+    @Autowired
+    private SectionService sectionService;
 
     @GetMapping("/page")
     public R<Page> page(int page,int pagesize,String segrange){
@@ -58,7 +64,39 @@ public class SegmentController {
     }
 
     //segment infomation
-    //为segment 查询主要信息:date,检测单位,检测段落,
+    //为segment 查询主要信息:date,检测单位,检测段落,路幅，桩号处理，验收弯沉值，路面温度：
+    //segdate,section.scons,segrange,roadway,roadhandle,segdesign,pavment_tp
+//sql1:SELECT segment.segid,segment.segdate,section.scons,segment.segrange,segment.roadway,segment.roadhandle,segment.segdesign FROM section,segment WHERE segment.segsid=section.sid;
+    @GetMapping("/info")
+    public R<List> getInfo(Section section,Segment segment){
+        //segment表条件构造器
+        LambdaQueryWrapper<Segment> queryWrapper = new LambdaQueryWrapper<>();
+        //segment条件segid相同　　
+        queryWrapper.eq(Segment::getSegid,segment.getSegid());
+        //查询segment
+        Segment segmentServiceOne = segmentService.getOne(queryWrapper);
+
+
+        //section表条件构造器
+        LambdaQueryWrapper<Section> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        lambdaQueryWrapper.eq(Section::getSid,section.getSid());
+        lambdaQueryWrapper.eq(Section::getSid,segmentServiceOne.getSegsid());
+        //根据返回sgesid 查询section
+        Section sectionServiceOne = sectionService.getOne(lambdaQueryWrapper);
+
+        //返回结果
+        //segdate,section.scons,segrange,roadway,roadhandle,segdesign,pavment_tp
+        List<String> result = new ArrayList<>();
+        result.add(segmentServiceOne.getSegdate());
+        result.add(sectionServiceOne.getScons());
+        result.add(segmentServiceOne.getSegrange());
+        result.add(segmentServiceOne.getRoadway());
+        result.add(segmentServiceOne.getRoadhandle());
+        result.add(segmentServiceOne.getSegdesign());
+        result.add(segmentServiceOne.getPavement_tp());
+
+        return R.success("查询成功",result);
+    }
 
 
     //增加数据

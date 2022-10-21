@@ -63,7 +63,7 @@ public class UserController {
 
     @PassToken
     @PostMapping("/login")
-    public R<String> login(HttpServletRequest request, @RequestBody User user){
+    public R<User> login(HttpServletRequest request, @RequestBody User user){
         // 1.将密码进行MD5加密
 
         String pwd = user.getPwd();
@@ -91,7 +91,7 @@ public class UserController {
         //5.登录成功，将用户id存入Session并返回登录成功结果   返回token
         String token = TestJwt.generateToken(ump);
 
-        return R.success(token);
+        return R.success("登录成功",token);
 
 
 
