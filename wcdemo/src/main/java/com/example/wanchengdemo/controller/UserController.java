@@ -6,7 +6,7 @@ import com.example.wanchengdemo.annotation.PassToken;
 import com.example.wanchengdemo.annotation.UserLoginToken;
 import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
-import com.example.wanchengdemo.entity.User;
+import com.example.wanchengdemo.domain.User;
 import com.example.wanchengdemo.service.UserService;
 import com.example.wanchengdemo.util.TestJwt;
 import lombok.extern.slf4j.Slf4j;
