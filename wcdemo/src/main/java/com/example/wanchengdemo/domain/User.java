@@ -1,4 +1,4 @@
-package com.example.wanchengdemo.entity;
+package com.example.wanchengdemo.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,31 +14,33 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "section")
-public class Section{
+@TableName(value = "user")
+public class User{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime CreateTime;
+    private String department;
+    private String mail;
     private String modifiedby;
-    private String scons;
+    private String phone;
+    private String pwd;
     @TableId(type = IdType.ID_WORKER_STR)
-    private String sid;
-    private String sname;
-    private String spid;
-    private String stesting;
+    private String uid;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime UpdateTime;
+    private String username;
     
-    public Section(Section section) {
-        if (Objects.nonNull(section)) {
-            this.CreateTime=section.CreateTime;
-            this.modifiedby=section.modifiedby;
-            this.scons=section.scons;
-            this.sid=section.sid;
-            this.sname=section.sname;
-            this.spid=section.spid;
-            this.stesting=section.stesting;
-            this.UpdateTime=section.UpdateTime;
+    public User(User user) {
+        if (Objects.nonNull(user)) {
+            this.CreateTime=user.CreateTime;
+            this.department=user.department;
+            this.mail=user.mail;
+            this.modifiedby=user.modifiedby;
+            this.phone=user.phone;
+            this.pwd=user.pwd;
+            this.uid=user.uid;
+            this.UpdateTime=user.UpdateTime;
+            this.username=user.username;
         }
     }
 }

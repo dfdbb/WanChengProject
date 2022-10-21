@@ -29,6 +29,7 @@ public class PermissionController {
         //雪花算法生成id
         IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
         long snowflakeId = idGetSnowflake.snowflakeId();
+
         return R.success(permissionService.save(permission));
 
     }

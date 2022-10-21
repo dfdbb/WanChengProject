@@ -1,4 +1,4 @@
-package com.example.wanchengdemo.entity;
+package com.example.wanchengdemo.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,27 +14,31 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "project")
-public class Project{
+@TableName(value = "section")
+public class Section{
     private static final long serialVersionUID = 1L;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime CreateTime;
     private String modifiedby;
+    private String scons;
     @TableId(type = IdType.ID_WORKER_STR)
-    private String pid;
-    private String pname;
-    private String powner;
+    private String sid;
+    private String sname;
+    private String spid;
+    private String stesting;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime UpdateTime;
     
-    public Project(Project project) {
-        if (Objects.nonNull(project)) {
-            this.CreateTime=project.CreateTime;
-            this.modifiedby=project.modifiedby;
-            this.pid=project.pid;
-            this.pname=project.pname;
-            this.powner=project.powner;
-            this.UpdateTime=project.UpdateTime;
+    public Section(Section section) {
+        if (Objects.nonNull(section)) {
+            this.CreateTime=section.CreateTime;
+            this.modifiedby=section.modifiedby;
+            this.scons=section.scons;
+            this.sid=section.sid;
+            this.sname=section.sname;
+            this.spid=section.spid;
+            this.stesting=section.stesting;
+            this.UpdateTime=section.UpdateTime;
         }
     }
 }

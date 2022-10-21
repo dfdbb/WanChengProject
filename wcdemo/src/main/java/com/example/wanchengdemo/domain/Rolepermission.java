@@ -1,5 +1,7 @@
 package com.example.wanchengdemo.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ public class Rolepermission{
     private LocalDateTime CreateTime;
     private String modifiedby;
     private String permissioname;
+    @TableId(type = IdType.ID_WORKER_STR)
     private String permissionid;
 
     private String roleid;
