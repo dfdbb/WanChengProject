@@ -6,8 +6,10 @@ import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Section;
 import com.example.wanchengdemo.entity.Segment;
+import com.example.wanchengdemo.entity.Site;
 import com.example.wanchengdemo.service.SectionService;
 import com.example.wanchengdemo.service.SegmentService;
+import com.example.wanchengdemo.service.SiteService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class SegmentController {
 
     @Autowired
     private SectionService sectionService;
+
+    @Autowired
+    SiteService siteService;
 
     @GetMapping("/page")
     public R<Page> page(int page,int pagesize,String segrange){
@@ -95,7 +100,13 @@ public class SegmentController {
         result.add(segmentServiceOne.getSegdesign());
         result.add(segmentServiceOne.getPavement_tp());
 
-        return R.success("查询成功",result);
+
+        //根据segid.id返回　所有相关检测点信息
+        LambdaQueryWrapper<Site> siteLambdaQueryWrapper= new LambdaQueryWrapper<>();
+        siteLambdaQueryWrapper.eq(Site::getSitesid,segmentServiceOne.getSegid());
+
+        List<Site> data = siteService.list(siteLambdaQueryWrapper);
+        return R.success("查询成功",result,data);
     }
 
 
