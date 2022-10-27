@@ -69,7 +69,7 @@ public class SegmentController {
     }
 
     //segment infomation
-    //为segment 查询主要信息:date,检测单位,检测段落,路幅，桩号处理，验收弯沉值，路面温度：
+    //为segment 查询主要信息:date,检测单位,检测段落,路幅，桩号处理，验收弯沉值，路面温度  与该segment下相关site数据　
     //segdate,section.scons,segrange,roadway,roadhandle,segdesign,pavment_tp
 //sql1:SELECT segment.segid,segment.segdate,section.scons,segment.segrange,segment.roadway,segment.roadhandle,segment.segdesign FROM section,segment WHERE segment.segsid=section.sid;
     @GetMapping("/info")

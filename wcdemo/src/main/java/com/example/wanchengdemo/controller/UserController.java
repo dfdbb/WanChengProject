@@ -162,9 +162,11 @@ public class UserController {
     @GetMapping
     public R<List> getAll(User user){
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
-        //根据id查询
+        //根据id进行精确查询
         queryWrapper.eq(StringUtils.isNotEmpty(user.getUid()),User::getUid,user.getUid());
+        //根据用户名进行模糊查询
         queryWrapper.like(StringUtils.isNotEmpty(user.getUsername()),User::getUsername,user.getUsername());
+        //根据用户部门进行模糊查询
         queryWrapper.like(StringUtils.isNotEmpty(user.getDepartment()),User::getDepartment,user.getDepartment());
 
 
