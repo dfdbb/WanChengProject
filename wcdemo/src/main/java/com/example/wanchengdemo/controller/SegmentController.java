@@ -100,7 +100,6 @@ public class SegmentController {
         result.add(segmentServiceOne.getSegdesign());
         result.add(segmentServiceOne.getPavement_tp());
 
-
         //根据segid.id返回　所有相关检测点信息
         LambdaQueryWrapper<Site> siteLambdaQueryWrapper= new LambdaQueryWrapper<>();
         siteLambdaQueryWrapper.eq(Site::getSitesid,segmentServiceOne.getSegid());

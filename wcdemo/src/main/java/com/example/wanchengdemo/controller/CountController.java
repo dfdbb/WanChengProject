@@ -55,13 +55,13 @@ public class CountController {
         Dictionary endResult = new Hashtable();
 
         //项目总数-------------测试正常
-        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(project.getOwnerid()),Project::getOwnerid,project.getOwnerid());
-        if (StringUtils.isNotEmpty(project.getOwnerid())){
-            count = projectService.count(lambdaQueryWrapper);
-            result = projectService.list(lambdaQueryWrapper);
-
-            return R.success("统计成功，结果为：",count,result);
-        }
+//        lambdaQueryWrapper.eq(StringUtils.isNotEmpty(project.getOwnerid()),Project::getOwnerid,project.getOwnerid());
+//        if (StringUtils.isNotEmpty(project.getOwnerid())){
+//            count = projectService.count(lambdaQueryWrapper);
+//            result = projectService.list(lambdaQueryWrapper);
+//
+//            return R.success("统计成功，结果为：",count,result);
+//        }
         //合同段总数
 /*        if (result != null){
             for (Project projectSection : list){
