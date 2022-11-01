@@ -27,7 +27,7 @@ public class txttest {
 
     public static void main(String[] args){
         File file = new File("C:\\Users\\young\\OneDrive\\桌面\\弯沉\\测试数据\\赫六6标.txt");
-        System.out.println("你好");
+
         System.out.println(txt2String(file));
     }
 }
