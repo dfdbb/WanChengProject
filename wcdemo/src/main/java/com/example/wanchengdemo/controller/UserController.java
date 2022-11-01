@@ -7,7 +7,10 @@ import com.example.wanchengdemo.annotation.UserLoginToken;
 import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.domain.User;
+import com.example.wanchengdemo.entity.vo.ResultVO;
 import com.example.wanchengdemo.service.UserService;
+import com.example.wanchengdemo.util.JwtUtil;
+import com.example.wanchengdemo.util.ResultVOUtil;
 import com.example.wanchengdemo.util.TestJwt;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -220,7 +225,18 @@ public class UserController {
         return "你已通过验证";
     }
 
+    @RequestMapping("/login")
+    public ResultVO<Object> login() throws IOException {
+        // 生成token，token有效时间为30分钟
+        String token = JwtUtil.createJWT(String.valueOf(new Date()), "user", 3600000L);
+        // 将用户户名和token返回
+        return ResultVOUtil.success(token);
+    }
 
+    @RequestMapping("/token/admin")
+    public ResultVO<Object> token() {
+        return ResultVOUtil.success("需要token才可以访问的接口");
+    }
 
         
 

@@ -42,5 +42,7 @@ public class User{
             this.UpdateTime=user.UpdateTime;
             this.username=user.username;
         }
+
+
     }
 }

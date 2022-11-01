@@ -21,7 +21,7 @@ public class Permission{
     private LocalDateTime CreateTime;
     private String modifiedby;
     @TableId(type = IdType.ID_WORKER_STR)
-    private Integer permissionid;
+    private String id;
     private String permissionname;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime UpdateTime;
@@ -30,7 +30,7 @@ public class Permission{
         if (Objects.nonNull(permission)) {
             this.CreateTime=permission.CreateTime;
             this.modifiedby=permission.modifiedby;
-            this.permissionid=permission.permissionid;
+            this.id=permission.id;
             this.permissionname=permission.permissionname;
             this.UpdateTime=permission.UpdateTime;
         }

@@ -5,10 +5,15 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.commom.pageR;
+import com.example.wanchengdemo.domain.Permission;
+import com.example.wanchengdemo.domain.Role;
 import com.example.wanchengdemo.domain.Rolepermission;
+import com.example.wanchengdemo.domain.Segment;
 import com.example.wanchengdemo.service.IRolepermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xin.altitude.cms.common.entity.PageEntity;
+
 
 import java.util.Arrays;
 
@@ -43,5 +48,40 @@ public class RolepermissionController {
     @GetMapping(value = "/detail/{permissionid}")
     public R detail(@PathVariable("permissionid") Integer roleparmissionid) {
         return R.success(rolepermissionService.getById(roleparmissionid));
+
+
     }
+
+
+
+    @GetMapping("/permission/page")
+    public R pageVo(PageEntity pageEntity, Permission permission){
+        return R.success(rolepermissionService.pageVo(pageEntity.toPage(), permission));
+    }
+    @GetMapping("/permission/list")
+    public R listVo(Permission permission){
+        return R.success(rolepermissionService.listVo(permission));
+    }
+
+    @GetMapping(value = "/permission/detail/{id}")
+    public R detailPermissionlVo(@PathVariable("id") String id) {
+        return R.success(rolepermissionService.getPermissionVo( id));
+    }
+
+
+    @GetMapping("/role/page")
+    public R pageVo(PageEntity pageEntity, Role role){
+        return R.success(rolepermissionService.pageVo(pageEntity.toPage(), role));
+    }
+    @GetMapping("/role/list")
+    public R listVo(Role role){
+        return R.success(rolepermissionService.listVo(role));
+    }
+
+    @GetMapping(value = "/role/detail/{id}")
+    public R detailRolelVo(@PathVariable("id") String id) {
+        return R.success(rolepermissionService.getPermissionVo( id));
+    }
+
+
 }

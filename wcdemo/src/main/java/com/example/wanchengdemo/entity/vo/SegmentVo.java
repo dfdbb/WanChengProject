@@ -14,9 +14,8 @@ import com.example.wanchengdemo.domain.Segment;
 public class SegmentVo extends Segment {
     private static final long serialVersionUID = 1L;
     private String sname;
-    private Integer sid;
     private String spid;
-
+    private String scons;
 
     public SegmentVo() {
     }

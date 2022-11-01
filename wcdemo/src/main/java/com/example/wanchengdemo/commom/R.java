@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 
 @Data
 public class R<T> extends LinkedHashMap<String, Object> {
+    private Integer code;
+    private String msg;
+    private Object data;
     public static final String CODE_TAG = "code";
     public static final String MSG_TAG = "msg";
     public static final String DATA_TAG = "data";
@@ -42,7 +45,12 @@ public class R<T> extends LinkedHashMap<String, Object> {
     public static R success(String msg) {
         return success(msg, (Object)null);
     }
-
+    public static R fail(String msg) {
+        R result = new R();
+        result.setCode(0);
+        result.setMsg(msg);
+        return result;
+    }
     public static R success(String msg, Object data) {
         return new R(HttpStatus.OK.value(), msg, data);
     }

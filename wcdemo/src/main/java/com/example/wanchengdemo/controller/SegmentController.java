@@ -52,8 +52,8 @@ public class SegmentController {
         queryWrapper.like(StringUtils.isNotEmpty(segment.getSegdate()),Segment::getSegdate,segment.getSegdate());
 
 
-        //按segsid
-        queryWrapper.eq(StringUtils.isNotEmpty(segment.getSegsid()),Segment::getSegsid,segment.getSegsid());
+        //按sid
+        queryWrapper.eq(StringUtils.isNotEmpty(segment.getSid()),Segment::getSid,segment.getSid());
 
 
         List<Segment> list = segmentService.list(queryWrapper);
