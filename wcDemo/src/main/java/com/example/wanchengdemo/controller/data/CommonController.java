@@ -38,4 +38,15 @@ public class CommonController {
         Files.copy(file.getInputStream(), dest.toPath());
         return "Upload file success : " + dest.getAbsolutePath();
     }
+
+
+    /*
+    * 文件导入数据库
+    * */
+
+    @PostMapping("/")
+    public R<String> fileInSql(){
+
+        return null;
+    }
 }

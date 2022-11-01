@@ -1,8 +1,11 @@
-package com.example.wanchengdemo;
+package com.example.wanchengdemo.util;
+
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 
-public class txttest {
+
+public class Txttest {
     /**
      * 读取txt文件的内容
      * @param file 想要读取的文件对象
@@ -45,10 +48,11 @@ public class txttest {
     }
 
     public static void main(String[] args){
-       File file = new File("D:\\Project\\source\\赫六5标2.txt");
+        File file = new File("D:\\Project\\source\\赫六5标2.txt");
 //        File file = new File("D:\\歌词\\江湖流.txt");
         System.out.println(txt2String(file));
     }
 
 
 }
+
