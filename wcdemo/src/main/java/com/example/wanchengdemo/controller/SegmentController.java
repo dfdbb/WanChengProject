@@ -13,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
-import xin.altitude.cms.common.entity.PageEntity;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,7 +59,7 @@ public class SegmentController {
 
 
         //按sid
-        queryWrapper.eq(StringUtils.isNotEmpty(segment.getSid()),Segment::getSid,segment.getSid());
+        queryWrapper.eq(StringUtils.isNotEmpty(segment.getSegid()),Segment::getSid,segment.getSid());
 
 
         List<Segment> list = segmentService.list(queryWrapper);
@@ -71,7 +71,7 @@ public class SegmentController {
     //segdate,section.scons,segrange,roadway,roadhandle,segdesign,pavment_tp
 //sql1:SELECT segment.segid,segment.segdate,section.scons,segment.segrange,segment.roadway,segment.roadhandle,segment.segdesign FROM section,segment WHERE segment.segsid=section.sid;
     @GetMapping("/info")
-    public R<List> getInfo(Section section,Segment segment){
+    public R<List> getInfo(Section section, Segment segment){
         //segment表条件构造器
         LambdaQueryWrapper<Segment> queryWrapper = new LambdaQueryWrapper<>();
         //segment条件segid相同　　
