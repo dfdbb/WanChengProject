@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.wanchengdemo.mapper.SegmentMapper;
 import com.example.wanchengdemo.util.TestJwt;
 
 public class Test {
@@ -33,6 +34,11 @@ public class Test {
     public void TestToken(){
         System.out.println(TestJwt.get("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJ5b3VuZyIsImV4cCI6MTY2NTgxNzA5MywiaWF0IjoxNjY1ODEzNDkzfQ.BErKFf3v0sMhDhYXdDtRMoCOmgSFF8pVvvcKTLxyzfE","username"));
 
+
+    }
+
+    @org.junit.Test
+    void get(){
 
     }
 

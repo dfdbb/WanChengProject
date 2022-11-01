@@ -4,22 +4,19 @@ spring:
   application:
     name: wancheng
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/testz?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-    username: root
-    password: 123456
-    # redis 配置
-    redis:
-      # 地址
-      host: localhost
-      # 端口，默认为6379
-      port: 6379
-      # 数据库索引
-      database: 0
-      # 密码
-      password: 123456
-
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/wancheng_test_demo1?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: "0000"
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
 
 mybatis-plus:
   configuration:
@@ -29,3 +26,13 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+
+file:
+  upload:
+    path: D:\ProjectStoreg\
+
+
+
+
+
+
