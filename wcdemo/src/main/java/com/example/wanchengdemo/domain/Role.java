@@ -21,7 +21,7 @@ public class Role{
     private LocalDateTime CreateTime;
     private String modifiedby;
     @TableId(type = IdType.ID_WORKER_STR)
-    private String roleid;
+    private String id;
     private String rolename;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime UpdateTime;
@@ -30,7 +30,7 @@ public class Role{
         if (Objects.nonNull(role)) {
             this.CreateTime=role.CreateTime;
             this.modifiedby=role.modifiedby;
-            this.roleid=role.roleid;
+            this.id=role.id;
             this.rolename=role.rolename;
             this.UpdateTime=role.UpdateTime;
         }

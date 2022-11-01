@@ -1,6 +1,6 @@
 package com.example.wanchengdemo.util;
 
-import com.example.wanchengdemo.entity.User;
+import com.example.wanchengdemo.domain.User;
 
 import java.util.HashMap;
 import java.util.Map;

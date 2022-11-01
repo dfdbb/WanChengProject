@@ -1,4 +1,4 @@
-package com.example.wanchengdemo.entity;
+package com.example.wanchengdemo.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -27,7 +27,7 @@ public class Segment{
     @TableId(type = IdType.ID_WORKER_STR)
     private String segid;
     private String segrange;
-    private String segsid;
+    private String sid;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime UpdateTime;
     
@@ -41,7 +41,7 @@ public class Segment{
             this.segdesign=segment.segdesign;
             this.segid=segment.segid;
             this.segrange=segment.segrange;
-            this.segsid=segment.segsid;
+            this.sid=segment.sid;
             this.UpdateTime=segment.UpdateTime;
         }
     }

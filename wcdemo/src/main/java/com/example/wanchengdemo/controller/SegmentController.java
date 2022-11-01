@@ -6,7 +6,6 @@ import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Section;
 import com.example.wanchengdemo.entity.Segment;
-import com.example.wanchengdemo.entity.Site;
 import com.example.wanchengdemo.service.SectionService;
 import com.example.wanchengdemo.service.SegmentService;
 import com.example.wanchengdemo.service.SiteService;
@@ -14,9 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xin.altitude.cms.common.entity.AjaxResult;
+import xin.altitude.cms.common.entity.PageEntity;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Slf4j
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -29,9 +30,6 @@ public class SegmentController {
 
     @Autowired
     private SectionService sectionService;
-
-    @Autowired
-    SiteService siteService;
 
     @GetMapping("/page")
     public R<Page> page(int page,int pagesize,String segrange){
@@ -60,8 +58,8 @@ public class SegmentController {
         queryWrapper.like(StringUtils.isNotEmpty(segment.getSegdate()),Segment::getSegdate,segment.getSegdate());
 
 
-        //按segsid
-        queryWrapper.eq(StringUtils.isNotEmpty(segment.getSegsid()),Segment::getSegsid,segment.getSegsid());
+        //按sid
+        queryWrapper.eq(StringUtils.isNotEmpty(segment.getSid()),Segment::getSid,segment.getSid());
 
 
         List<Segment> list = segmentService.list(queryWrapper);
@@ -69,7 +67,7 @@ public class SegmentController {
     }
 
     //segment infomation
-    //为segment 查询主要信息:date,检测单位,检测段落,路幅，桩号处理，验收弯沉值，路面温度  与该segment下相关site数据　
+    //为segment 查询主要信息:date,检测单位,检测段落,路幅，桩号处理，验收弯沉值，路面温度：
     //segdate,section.scons,segrange,roadway,roadhandle,segdesign,pavment_tp
 //sql1:SELECT segment.segid,segment.segdate,section.scons,segment.segrange,segment.roadway,segment.roadhandle,segment.segdesign FROM section,segment WHERE segment.segsid=section.sid;
     @GetMapping("/info")
@@ -100,12 +98,7 @@ public class SegmentController {
         result.add(segmentServiceOne.getSegdesign());
         result.add(segmentServiceOne.getPavement_tp());
 
-        //根据segid.id返回　所有相关检测点信息
-        LambdaQueryWrapper<Site> siteLambdaQueryWrapper= new LambdaQueryWrapper<>();
-        siteLambdaQueryWrapper.eq(Site::getSitesid,segmentServiceOne.getSegid());
-
-        List<Site> data = siteService.list(siteLambdaQueryWrapper);
-        return R.success("查询成功",result,data);
+        return R.success("查询成功",result);
     }
 
 
@@ -145,7 +138,18 @@ public class SegmentController {
         return R.success("修改成功");
     }
 
-
+    @GetMapping("/vo/page")
+    public R pageVo(PageEntity pageEntity, Segment segment){
+        return R.success(segmentService.pageVo(pageEntity.toPage(), segment));
+    }
+    @GetMapping("/vo/list")
+    public R listVo(Segment segment){
+        return R.success(segmentService.listVo(segment));
+    }
+    @GetMapping(value = "/vo/detail/{segid}")
+    public R detailVo(@PathVariable("segid") String segid) {
+        return R.success(segmentService.getOneVo(segid));
+    }
 
 
 }
