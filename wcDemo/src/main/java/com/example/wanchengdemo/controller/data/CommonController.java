@@ -19,7 +19,7 @@ public class CommonController {
     * 文件上传
     *
     */
-
+    //值在application.yml 中， 此 为文件上传 后保存路径
     @Value("${file.upload.path}")
     private String path;
 

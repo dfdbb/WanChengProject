@@ -50,6 +50,8 @@ public class Txttest {
     public static void main(String[] args){
         File file = new File("D:\\Project\\source\\赫六5标2.txt");
 //        File file = new File("D:\\歌词\\江湖流.txt");
+        String dataString = file.toString();
+
         System.out.println(txt2String(file));
     }
 
