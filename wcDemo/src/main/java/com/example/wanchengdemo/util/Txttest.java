@@ -1,8 +1,14 @@
 package com.example.wanchengdemo.util;
 
-import org.springframework.stereotype.Component;
+
+import com.example.wanchengdemo.entity.Site;
 
 import java.io.*;
+
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Txttest {
@@ -47,13 +53,47 @@ public class Txttest {
         return result.toString();
     }
 
-    public static void main(String[] args){
+    public static void main(Site site){
         File file = new File("D:\\Project\\source\\赫六5标2.txt");
-//        File file = new File("D:\\歌词\\江湖流.txt");
-        String dataString = file.toString();
 
-        System.out.println(txt2String(file));
+        String data = txt2String(file);
+
+
+        //获得检测合同
+        String regSection = "文件名.*弯沉测试数据.(.*).txt";
+        //获得检测日期
+        String regDate= "检测日期：(.*)";
+        //获得检测人员
+        String regMan= "检测人员：(.*)";
+        //获得检测段落
+        String regSegment= "检测段落：([a-zA-Z0-9+-]*)";
+        //获得路幅
+        String regRoadWay = "路幅：([左右]幅)";
+        //获得桩号处理
+        String regRoadHandle = "桩号处理：([顺逆]桩号)";
+        //获得交工验收弯沉值
+        String regDesign= "交工验收弯沉值（0.01mm）：([0-9]*)";
+        //获得路面温度
+        String regPavement_tp = "路面温度（°C）：([0-9]*)";
+        //获得弯沉数据
+        String regData= "([A-Z][0-9]{4}[+][0-9]{3}\t[m]\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*)";
+
+        String[] regArgs = {regSection,regDate,regMan,regSegment,regRoadWay,regRoadHandle,regDesign,regPavement_tp};
+
+        for (String reg : regArgs) {
+            Pattern pattern = Pattern.compile (reg);
+            Matcher matcher = pattern.matcher (data);
+
+            while (matcher.find()){
+                System.out.println(matcher.group(1));
+
+            }
+        }
+
+
     }
+
+
 
 
 }

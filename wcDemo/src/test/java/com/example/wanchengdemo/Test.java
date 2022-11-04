@@ -6,6 +6,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.wanchengdemo.util.TestJwt;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Test {
     @org.junit.Test
     public void test(){
@@ -37,11 +40,22 @@ public class Test {
     }
 
     @org.junit.Test
-    void get(){
+    public void get(){
 
     }
 
+    @org.junit.Test
+    public void reg(){
+        String str = "我是二年级一班的小名";
+        String reg = ".年级.班";
 
+        Pattern pattern = Pattern.compile (reg);
+        Matcher matcher = pattern.matcher (str);
 
+        while (matcher.find ())
+        {
+            System.out.println (matcher.group ());
+        }
+    }
 
 }
