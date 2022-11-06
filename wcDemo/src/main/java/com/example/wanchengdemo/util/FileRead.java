@@ -1,9 +1,11 @@
 package com.example.wanchengdemo.util;
 
 
+import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Section;
 import com.example.wanchengdemo.entity.Segment;
 import com.example.wanchengdemo.entity.Site;
+import com.example.wanchengdemo.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -40,7 +42,7 @@ public class FileRead {
           File file = new File("D:\\歌词\\江湖流.txt");
         System.out.println(txt2String(file));
     }*/
-
+    //读取文件
     public static String txt2String(File file){
         StringBuilder result = new StringBuilder();
         try{
@@ -56,10 +58,10 @@ public class FileRead {
         return result.toString();
     }
 
-    public static String dataClean(String sourceData){
+    //section清洗
+    public static Section sectionClean(String sourceData){
 
         Section section = new Section();
-        Segment segment = new Segment();
         Site    site    = new Site();
         //正则表达式
 
@@ -70,20 +72,12 @@ public class FileRead {
         //获得检测单位
         String regTesting= "检测人员：(.*)";
 
-        //获得检测日期
-        String regDate= "检测日期：(.*)";
-        //获得检测段落
-        String regSegment= "检测段落：([a-zA-Z0-9+-]*)";
-        //获得路幅
-        String regRoadWay = "路幅：([左右]幅)";
-        //获得桩号处理
-        String regRoadHandle = "桩号处理：([顺逆]桩号)";
-        //获得交工验收弯沉值
-        String regDesign= "交工验收弯沉值（0.01mm）：([0-9]*)";
-        //获得路面温度
-        String regPavement_tp = "路面温度（°C）：([0-9]*)";
-        //获得弯沉数据
-        String regData= "([A-Z][0-9]{4}[+][0-9]{3}\t[m]\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*)";
+
+
+
+
+
+
 
         //section清洗
         String[] sectionReg = {regSection,regScons,regTesting};
@@ -110,9 +104,70 @@ public class FileRead {
                 ++i;
             }
         }
-        System.out.println();
+
+        return section;
+    }
+
+    public static Segment segmentClean(String sourceData){
+
+        Segment segment = new Segment();
+
+        //获得检测段落
+        String regRange= "检测段落：([a-zA-Z0-9+-]*)";
+        //获得检测日期
+        String regDate= "检测日期：(.*)";
+        //获得路幅
+        String regRoadWay = "路幅：([左右]幅)";
+        //获得桩号处理
+        String regRoadHandle = "桩号处理：([顺逆]桩号)";
+        //获得交工验收弯沉值
+        String regDesign= "交工验收弯沉值（0.01mm）：([0-9]*)";
+        //获得路面温度
+        String regPavement_tp = "路面温度（°C）：([0-9]*)";
+
+        String[] regSegment = {regRange,regDate,regRoadWay,regRoadHandle,regDesign,regPavement_tp};
+
+        for (String reg : regSegment) {
+            Pattern pattern = Pattern.compile (reg);
+            Matcher matcher = pattern.matcher (sourceData);
+
+            int i = 1;
+
+            while (matcher.find()){
+                System.out.println(matcher.group(1));
+                //i = 1时，将 检测段 填入 segment 对象， i = 2时，填入 检测日期 ,i = 3时，填入 路幅, i = 4 时，填入 桩号处理 .... 交工验收弯沉值 路面温度
+
+                if (i == 1){
+                    segment.setSegrange(matcher.group(1));
+                }
+                if (i ==2 ){
+                    segment.setSegdate(matcher.group(1));
+                }
+                if (i ==3 ){
+                    segment.setRoadway(matcher.group(1));
+                }
+                if (i == 4){
+                    segment.setRoadhandle(matcher.group(1));
+                }
+                if (i == 5){
+                    segment.setPavement_tp(matcher.group(1));
+                }
+            }
+        }
+
+
         return null;
     }
+
+
+    //site清洗
+    public static Site siteClean(String dataSource){
+        //获得弯沉数据
+        String regData= "([A-Z][0-9]{4}[+][0-9]{3}\t[m]\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*)";
+        return null;
+    }
+
+
     public static void main(Site site){
         File file = new File("D:\\Project\\source\\赫六5标2.txt");
 

@@ -60,8 +60,12 @@ public class CommonController {
         //读取本地文件
         String sourceData = FileRead.txt2String(dest);
 
-        //清洗数据
-        FileRead.dataClean(sourceData);
+        //清洗 section 数据
+        Section sectionClean = FileRead.sectionClean(sourceData);
+
+        //清洗 segment 数据
+        Segment segmentClean = FileRead.segmentClean(sourceData);
+
 
         return "Upload file success : " + dest.getAbsolutePath();
     }
