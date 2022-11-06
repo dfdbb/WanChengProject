@@ -161,9 +161,21 @@ public class FileRead {
 
 
     //site清洗
-    public static Site siteClean(String dataSource){
+    public static Site siteClean(String sourceData){
         //获得弯沉数据
         String regData= "([A-Z][0-9]{4}[+][0-9]{3}\t[m]\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*)";
+
+        Pattern pattern = Pattern.compile (regData);
+        Matcher matcher = pattern.matcher (sourceData);
+
+        while (matcher.find()) {
+
+            System.out.println(matcher.group(1));
+            //i = 1时，将 合同段 填入section对象， i = 2时，填入 施工单位 ,i = 3时，填入 检测单位
+
+        }
+
+
         return null;
     }
 
@@ -201,7 +213,7 @@ public class FileRead {
 
             while (matcher.find()){
                 System.out.println(matcher.group(1));
-
+                
             }
         }
 

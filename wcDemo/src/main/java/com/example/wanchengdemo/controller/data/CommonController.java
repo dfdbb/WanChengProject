@@ -66,6 +66,9 @@ public class CommonController {
         //清洗 segment 数据
         Segment segmentClean = FileRead.segmentClean(sourceData);
 
+        //清洗 site 数据
+        Site siteClean = FileRead.siteClean(sourceData);
+
 
         return "Upload file success : " + dest.getAbsolutePath();
     }
