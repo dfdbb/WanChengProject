@@ -82,18 +82,22 @@ public class CommonController {
 
 
         //section导入,随后返回sectionid
+        //雪花生成section主键
         IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
         long snowflakeId = idGetSnowflake.snowflakeId();
-
-        //雪花生成section主键
         sectionClean.setSid(String.valueOf(snowflakeId));
-
         sectionService.save(sectionClean);
+
         //返回sectionId
         LambdaQueryWrapper<Section> sectionLambdaQueryWrapper = new LambdaQueryWrapper<>();
         sectionLambdaQueryWrapper.eq(Section::getSname,sectionClean.getSname());
         Section one = sectionService.getOne(sectionLambdaQueryWrapper);
         String sectionId = one.getSid();
+
+        //segment导入,雪花生成id
+        segmentClean.setSegid(String.valueOf(snowflakeId));
+        segmentClean.setSegsid(sectionId);
+        segmentService.save(segmentClean);
 
 
 

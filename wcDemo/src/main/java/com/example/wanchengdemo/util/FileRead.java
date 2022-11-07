@@ -78,7 +78,7 @@ public class FileRead {
         String[] sectionReg = {regSection,regScons,regTesting};
         //计时器
         int i = 1;
-        
+
         for (String reg : sectionReg) {
 
 
@@ -125,12 +125,12 @@ public class FileRead {
         String regPavement_tp = "路面温度（°C）：([0-9]*)";
 
         String[] regSegment = {regRange,regDate,regRoadWay,regRoadHandle,regDesign,regPavement_tp};
+        //计时器
+        int i = 1;
 
         for (String reg : regSegment) {
             Pattern pattern = Pattern.compile (reg);
             Matcher matcher = pattern.matcher (sourceData);
-
-            int i = 1;
 
             while (matcher.find()){
                 System.out.println(matcher.group(1));
@@ -148,14 +148,18 @@ public class FileRead {
                 if (i == 4){
                     segment.setRoadhandle(matcher.group(1));
                 }
-                if (i == 5){
+                if (i ==5 ){
+                    segment.setSegdesign(matcher.group(1));
+                }
+                if (i == 6){
                     segment.setPavement_tp(matcher.group(1));
                 }
+                i++;
             }
         }
 
 
-        return null;
+        return segment;
     }
 
 
