@@ -1,8 +1,6 @@
 package com.example.wanchengdemo.controller.data;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.wanchengdemo.commom.IdGetSnowflake;
-import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Project;
 import com.example.wanchengdemo.entity.Section;
 import com.example.wanchengdemo.entity.Segment;
@@ -10,7 +8,7 @@ import com.example.wanchengdemo.entity.Site;
 import com.example.wanchengdemo.service.dataService.SectionService;
 import com.example.wanchengdemo.service.dataService.SegmentService;
 import com.example.wanchengdemo.service.dataService.SiteService;
-import com.example.wanchengdemo.util.FileRead;
+import com.example.wanchengdemo.util.TxtFileRead;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,20 +59,20 @@ public class CommonController {
         Files.copy(file.getInputStream(), dest.toPath());
 
         //读取本地文件
-        String sourceData = FileRead.txt2String(dest);
+        String sourceData = TxtFileRead.txt2String(dest);
 
         //清洗 section 数据,传入pid
         //预设pid = 1584087247165063168
         project.setPid("1584087247165063168");
-        Section sectionClean = FileRead.sectionClean(sourceData);
+        Section sectionClean = TxtFileRead.sectionClean(sourceData);
         sectionClean.setSpid(project.getPid());
 
         //清洗 segment 数据
-        Segment segmentClean = FileRead.segmentClean(sourceData);
+        Segment segmentClean = TxtFileRead.segmentClean(sourceData);
 
         //清洗 site 数据
-        List siteClean = FileRead.siteClean(sourceData);
-        System.out.println(siteClean);  //显示返回site信息
+        List siteClean = TxtFileRead.siteClean(sourceData);
+        //System.out.println(siteClean);  //显示返回site信息
 
 
 
@@ -84,22 +82,78 @@ public class CommonController {
         //section导入,随后返回sectionid
         //雪花生成section主键
         IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
-        long snowflakeId = idGetSnowflake.snowflakeId();
-        sectionClean.setSid(String.valueOf(snowflakeId));
+
+        sectionClean.setSid(String.valueOf(idGetSnowflake.snowflakeId()));
         sectionService.save(sectionClean);
 
         //返回sectionId
-        LambdaQueryWrapper<Section> sectionLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        sectionLambdaQueryWrapper.eq(Section::getSname,sectionClean.getSname());
-        Section one = sectionService.getOne(sectionLambdaQueryWrapper);
-        String sectionId = one.getSid();
+        String sectionId = sectionClean.getSid();
 
         //segment导入,雪花生成id
-        segmentClean.setSegid(String.valueOf(snowflakeId));
+        segmentClean.setSegid(String.valueOf(idGetSnowflake.snowflakeId()));
         segmentClean.setSegsid(sectionId);
         segmentService.save(segmentClean);
 
+        //返回segmentId
+        String segmentId = segmentClean.getSegid();
 
+        //插入 site 数据
+        for (Object object : siteClean) {
+            //遍历返回的list,
+
+            //转为String方便分割
+            String objectString = String.valueOf(object);
+            String[] siteData = objectString.split("\t");
+            //计时器
+            int i = 1;
+            //System.out.println(objectString);
+
+            site.setSiteid(String.valueOf(idGetSnowflake.snowflakeId()));
+            //插入数据库
+            for (String sitedata : siteData) {
+                System.out.println("第"+i+"次遍历"+"值为："+sitedata);
+                if (i == 1){
+                    site.setSitecode(sitedata);
+                }
+                if (i == 2){
+                    site.setSitelane(sitedata);
+                }
+                if (i == 3){
+                    site.setLmax(Long.valueOf(sitedata));
+                }
+                if (i == 4){
+                    site.setLmin(Long.valueOf(sitedata));
+                }
+                if (i == 5){
+                    site.setDeflectio1(Long.valueOf(sitedata));
+                }
+                if (i == 6){
+                    site.setRmax(Long.valueOf(sitedata));
+                }
+                if (i == 7){
+                    site.setRmin(Long.valueOf(sitedata));
+                }
+                if (i == 8){
+                    site.setDeflectio2(Long.valueOf(sitedata));
+                }
+                if (i == 9 ){
+                    site.setSiteremark(sitedata);
+                }
+                i++;
+
+                //截至lfindex
+                /*if (i == 9){
+                    site.setLfindex(Long.valueOf(sitedata));
+                }
+                if (i == 10){
+                    site.setRfindex(Long.valueOf(sitedata));
+                }*/
+
+            }
+
+
+            siteService.save(site);
+        }
 
 
         return "Upload file success : " + dest.getAbsolutePath();
