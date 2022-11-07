@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,42 +74,39 @@ public class FileRead {
         //获得检测单位
         String regTesting= "检测人员：(.*)";
 
-
-
-
-
-
-
-
         //section清洗
         String[] sectionReg = {regSection,regScons,regTesting};
+        //计时器
+        int i = 1;
+        
         for (String reg : sectionReg) {
-            //计时器
-            int i = 1;
+
+
             Pattern pattern = Pattern.compile (reg);
             Matcher matcher = pattern.matcher (sourceData);
 
             while (matcher.find()){
                 System.out.println(matcher.group(1));
+                System.out.println(i);
                 //i = 1时，将 合同段 填入section对象， i = 2时，填入 施工单位 ,i = 3时，填入 检测单位
                 if (i==1){
                     section.setSname(matcher.group(1));
-                    
+
                 }
                 if(i==2){
                     section.setScons(matcher.group(1));
                 }
                 if (i == 3){
                     section.setStesting(matcher.group(1));
-
                 }
-                ++i;
+                i++;
             }
         }
 
         return section;
     }
 
+    //segment清洗
     public static Segment segmentClean(String sourceData){
 
         Segment segment = new Segment();
@@ -161,22 +160,26 @@ public class FileRead {
 
 
     //site清洗
-    public static Site siteClean(String sourceData){
+    public static List siteClean(String sourceData){
         //获得弯沉数据
         String regData= "([A-Z][0-9]{4}[+][0-9]{3}\t[m]\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*\t[0-9]*)";
 
         Pattern pattern = Pattern.compile (regData);
         Matcher matcher = pattern.matcher (sourceData);
 
+        List siteList = new ArrayList();
+
         while (matcher.find()) {
 
             System.out.println(matcher.group(1));
-            //i = 1时，将 合同段 填入section对象， i = 2时，填入 施工单位 ,i = 3时，填入 检测单位
+
+
+            siteList.add(matcher.group(1));
 
         }
 
 
-        return null;
+        return siteList;
     }
 
 
@@ -213,7 +216,7 @@ public class FileRead {
 
             while (matcher.find()){
                 System.out.println(matcher.group(1));
-                
+
             }
         }
 

@@ -1,5 +1,7 @@
 package com.example.wanchengdemo.controller.data;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.example.wanchengdemo.commom.IdGetSnowflake;
 import com.example.wanchengdemo.commom.R;
 import com.example.wanchengdemo.entity.Project;
 import com.example.wanchengdemo.entity.Section;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 
 @RestController
 @RequestMapping("/common")
@@ -49,7 +52,7 @@ public class CommonController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String create(@RequestPart MultipartFile file, String pid, Section section, Segment segment, Site site) throws IOException {
+    public String create(@RequestPart MultipartFile file,Project project,  Section section, Segment segment, Site site) throws IOException {
         //将文件保存至本地
         String fileName = file.getOriginalFilename();
         String filePath = path + fileName;
@@ -60,18 +63,44 @@ public class CommonController {
         //读取本地文件
         String sourceData = FileRead.txt2String(dest);
 
-        //清洗 section 数据
+        //清洗 section 数据,传入pid
+        //预设pid = 1584087247165063168
+        project.setPid("1584087247165063168");
         Section sectionClean = FileRead.sectionClean(sourceData);
+        sectionClean.setSpid(project.getPid());
 
         //清洗 segment 数据
         Segment segmentClean = FileRead.segmentClean(sourceData);
 
         //清洗 site 数据
-        Site siteClean = FileRead.siteClean(sourceData);
+        List siteClean = FileRead.siteClean(sourceData);
+        System.out.println(siteClean);  //显示返回site信息
+
+
+
+        //插入数据库
+
+
+        //section导入,随后返回sectionid
+        IdGetSnowflake idGetSnowflake = new IdGetSnowflake();
+        long snowflakeId = idGetSnowflake.snowflakeId();
+
+        //雪花生成section主键
+        sectionClean.setSid(String.valueOf(snowflakeId));
+
+        sectionService.save(sectionClean);
+        //返回sectionId
+        LambdaQueryWrapper<Section> sectionLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        sectionLambdaQueryWrapper.eq(Section::getSname,sectionClean.getSname());
+        Section one = sectionService.getOne(sectionLambdaQueryWrapper);
+        String sectionId = one.getSid();
+
+
 
 
         return "Upload file success : " + dest.getAbsolutePath();
     }
+
 
 
 
